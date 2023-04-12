@@ -1,4 +1,4 @@
-/* Copyright 2020 Adam Honse <calcprogrammer1@gmail.com>
+/* Copyright 2023 Willerson Stockler <https://github.com/willersonsp>
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -20,33 +20,18 @@
 #include "config_led.h"
 
 /* USB Device descriptor parameter */
-#define VENDOR_ID       0x0C45
-#define PRODUCT_ID      0x8513
+#define VENDOR_ID       0x80E7
+#define PRODUCT_ID      0x5001
 #define DEVICE_VER      0x0001
-
 #define MANUFACTURER    Sharkoon
 #define PRODUCT         SKILLER MECH SGK3
-
-/* Additional options */
-#define RGB_MATRIX_ENABLE 1
-#define RGB_MATRIX_KEYPRESSES
-#define RGB_MATRIX_FRAMEBUFFER_EFFECTS
-#define RGB_MATRIX_MAXIMUM_BRIGHTNESS 255
-#define RGB_MATRIX_STARTUP_SPD 32
-
-/* Key matrix size */
-#define MATRIX_ROWS 6
-#define MATRIX_COLS 21
-
-#define DIODE_DIRECTION ROW2COL
-
-#define MATRIX_COL_PINS { A0, A1, A2, A3, A4, A5, A6, A7, A14, A15, B0, B1, B2, B3, B4, B10, B11, B12, B13, B14, B15 }
-#define MATRIX_ROW_PINS { D15, D14, D13, D12, D11, D10 }
 
 /* Debounce reduces chatter (unintended double-presses) - set 0 if debouncing is not needed */
 #define DEBOUNCE 5
 
-/* Mechanical locking support. Use KC_LCAP, KC_LNUM or KC_LSCR instead in keymap */
-//#define LOCKING_SUPPORT_ENABLE
-/* Locking resynchronize hack */
-//#define LOCKING_RESYNC_ENABLE
+/* Forcing to use NKRO instead 6KRO */
+#define FORCE_NKRO
+
+/* Change larger keys per scan for elite gaming - disabled QMK deprecated */
+//#define QMK_KEYS_PER_SCAN 12
+

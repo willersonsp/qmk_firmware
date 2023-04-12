@@ -16,4 +16,4 @@
  
 #pragma once
 
-#define DRIVER_LED_TOTAL 104
+#define DRIVER_LED_TOTAL 107

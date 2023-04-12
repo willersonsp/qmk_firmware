@@ -1,4 +1,22 @@
 #include "rgb_matrix.h"
+#include "sn32f24x.h"
+
+#if !defined(RGB_MATRIX_HUE_STEP)
+#    define RGB_MATRIX_HUE_STEP 8
+#endif
+
+#if !defined(RGB_MATRIX_SAT_STEP)
+#    define RGB_MATRIX_SAT_STEP 16
+#endif
+
+#if !defined(RGB_MATRIX_VAL_STEP)
+#    define RGB_MATRIX_VAL_STEP 16
+#endif
+
+#if !defined(RGB_MATRIX_SPD_STEP)
+#    define RGB_MATRIX_SPD_STEP 16
+#endif
+
 /*
     COLS key / led
     PWM PWM00A - PWM21A (PWM15A unused)
@@ -38,7 +56,7 @@
 LED_TYPE led_state[LED_MATRIX_ROWS * LED_MATRIX_COLS];
 uint8_t led_pos[DRIVER_LED_TOTAL];
 
-void init(void) {
+void SN32F24x_init(void) {
     unsigned int i = 0;
     for (unsigned int y = 0; y < LED_MATRIX_ROWS; y++) {
         for (unsigned int x = 0; x < LED_MATRIX_COLS; x++) {
@@ -52,27 +70,21 @@ void init(void) {
 
 static void flush(void) {}
 
-void set_color(int index, uint8_t r, uint8_t g, uint8_t b) {
+void SN32F24x_set_color(int index, uint8_t r, uint8_t g, uint8_t b) {
     int corrected_index = led_pos[index];
     led_state[corrected_index].r = r;
     led_state[corrected_index].g = g;
     led_state[corrected_index].b = b;
 }
 
-static void set_color_all(uint8_t r, uint8_t g, uint8_t b) {
+void SN32F24x_set_color_all(uint8_t r, uint8_t g, uint8_t b) {
     for (int i=0; i<DRIVER_LED_TOTAL; i++)
-        set_color(i, r, g, b);
+        SN32F24x_set_color(i, r, g, b);
 }
 
 const rgb_matrix_driver_t rgb_matrix_driver = {
-    .init          = init,
+    .init          = SN32F24x_init,
     .flush         = flush,
-    .set_color     = set_color,
-    .set_color_all = set_color_all,
+    .set_color     = SN32F24x_set_color,
+    .set_color_all = SN32F24x_set_color_all,
 };
-
-void led_set(uint8_t usb_led) {
-	writePin(LED_NUM_LOCK_PIN, !IS_LED_ON(usb_led, USB_LED_NUM_LOCK));
-    writePin(LED_CAPS_LOCK_PIN, !IS_LED_ON(usb_led, USB_LED_CAPS_LOCK));
-	writePin(LED_SCROLL_LOCK_PIN, !IS_LED_ON(usb_led, USB_LED_SCROLL_LOCK));
-}
