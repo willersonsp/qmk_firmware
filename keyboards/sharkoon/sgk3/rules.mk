@@ -26,3 +26,6 @@ RGB_MATRIX_DRIVER = SN32F24x
 
 # OpenRGB support
 OPENRGB_ENABLE = yes
+
+#custom debounce
+DEBOUNCE_TYPE = sym_eager_pk
