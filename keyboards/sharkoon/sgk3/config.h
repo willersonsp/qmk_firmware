@@ -33,5 +33,5 @@
 #define FORCE_NKRO
 
 /* Change larger keys per scan for elite gaming - disabled QMK deprecated */
-//#define QMK_KEYS_PER_SCAN 12
-
+#define QMK_KEYS_PER_SCAN 12
+#define USB_POLLING_INTERVAL_MS 1
